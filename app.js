@@ -28,15 +28,23 @@ app.use(function(req, res, next) {
 });
 
 
+var smtpTransport = require('nodemailer-smtp-transport');
 
+/*var transport = nodemailer.createTransport(smtpTransport({
+    service: 'gmail',
+    auth: {
+        user: '*******@gmail.com',
+        pass: '*****password'
+    }
+}));*/
 // create reusable transporter object using the default SMTP transport
-let transporter = nodemailer.createTransport({
+let transporter = nodemailer.createTransport(smtpTransport({//nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'joshua.greenslade6@gmail.com',//'hello@lavitaglam.com',
         pass: 'IW2AjxHi'//'Invictusjan93'
     }
-});
+}));
 
 app.post('/api/email/', function(req, res, next){
     console.log(req.body);

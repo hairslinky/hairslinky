@@ -4,6 +4,7 @@ var express = require('express');
 var PORT = process.env.PORT || 3000;
 var app = express();
 var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
@@ -28,21 +29,12 @@ app.use(function(req, res, next) {
 });
 
 
-var smtpTransport = require('nodemailer-smtp-transport');
-
-/*var transport = nodemailer.createTransport(smtpTransport({
-    service: 'gmail',
-    auth: {
-        user: '*******@gmail.com',
-        pass: '*****password'
-    }
-}));*/
 // create reusable transporter object using the default SMTP transport
-let transporter = nodemailer.createTransport(smtpTransport({//nodemailer.createTransport({
+let transporter = nodemailer.createTransport(smtpTransport({
     service: 'gmail',
     auth: {
-        user: 'joshua.greenslade6@gmail.com',//'hello@lavitaglam.com',
-        pass: 'IW2AjxHi'//'Invictusjan93'
+        user: 'hello@lavitaglam.com',
+        pass: 'Invictusjan93'
     }
 }));
 
@@ -53,9 +45,9 @@ app.post('/api/email/', function(req, res, next){
     Object.keys(req.body).forEach(function(key){result += key + ": " + req.body[key] + "\n"});
     let mailOptions = {
         //from: '"Joshua " <joshua.aaaagreenslade6@gmail.com>', // sender address
-        to: 'joshua.greenslade6@gmail.com',//'hello@lavitaglam.com', // list of receivers
+        to: 'hello@lavitaglam.com', // list of receivers
         subject: 'New Hairslinkey Order', // Subject line
-        text: result//'I figured out how to send an email from a server and it is freeeeee!!!!!' // plain text body
+        text: result // plain text body
     };
 
     // send mail with defined transport object
